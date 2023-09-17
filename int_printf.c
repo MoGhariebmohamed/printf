@@ -14,11 +14,9 @@
  * @return: The updated count of characters in the buffer.
  */
 int int_printf(int count, char buffer[], int *buffer_index, int num) {
-    // Convert the integer to a string (assuming a large enough buffer)
-    char num_buffer[12]; // This accommodates INT_MIN and INT_MAX
+    char num_buffer[12]; 
     int num_length = snprintf(num_buffer, sizeof(num_buffer), "%d", num);
 
-    // Copy the string representation of the integer to the output buffer
     for (int i = 0; i < num_length; i++) {
         buffer[(*buffer_index)++] = num_buffer[i];
         count++;
