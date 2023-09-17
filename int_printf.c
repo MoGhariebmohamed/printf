@@ -16,8 +16,8 @@
 int int_printf(int count, char buffer[], int *buffer_index, int num) {
     char num_buffer[12]; 
     int num_length = snprintf(num_buffer, sizeof(num_buffer), "%d", num);
-
-    for (int i = 0; i < num_length; i++) {
+    int i;
+    for (i = 0; i < num_length; i++) {
         buffer[(*buffer_index)++] = num_buffer[i];
         count++;
     }
