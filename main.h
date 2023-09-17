@@ -1,13 +1,15 @@
 #ifndef MAIN_H
 #define MAIN_H
+
 #include <stdio.h>
+#include <stdlib.h>
+#include <stdarg.h>
+#include <limits.h>
+#include <unistd.h>
 
-/**
-* void prototypes()
-*char prototypes()
-* int prototypes()
-*/
- int _printf(const char *format, ...);
+/* Function prototypes */
+int char_printf(int count, char buffer[], int *buffer_index, char c);
+int string_printf(int count, char buffer[], int *buffer_index, const char *str);
+int _printf(const char *format, ...);
 
-
-#endif /*MAIN_H*/
+#endif /* MAIN_H */

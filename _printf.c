@@ -1,42 +1,38 @@
-#include <stdarg.h>
-#include <unistd.h>
-
+#include "main.h"
 
 /**
-* _printf - is a function that do the same functions as print.
-*@format: identifier to look for.
-*
-*Return:  the length of the string.
-**/
-
+ * _printf - Custom printf function.
+ *
+ * This function formats and prints a string to the standard output.
+ *
+ * @param format: The format string with optional format specifiers.
+ * @param ...: Variable number of arguments to replace format specifiers.
+ *
+ * @return: The number of characters printed (excluding the null terminator),
+ *          or -1 on error.
+ */
 int _printf(const char *format, ...) {
     va_list args;
     char buffer[1024];
     int count = 0;
     int buffer_index = 0;
-    
+
     if (format == NULL || (format[0] == '%' && format[1] == '\0'))
-		return (-1);
-    
+        return (-1);
+
     va_start(args, format);
 
     while (*format) {
         if (*format == '%') {
             format++;
+
             switch (*format) {
                 case 'c': {
-                    char c = va_arg(args, int);
-                    buffer[buffer_index++] = c;
-                    count++;
+                    count = char_printf(count, buffer, &buffer_index, va_arg(args, int));
                     break;
                 }
                 case 's': {
-                    const char *str = va_arg(args, const char *);
-                    while (*str) {
-                        buffer[buffer_index++] = *str;
-                        str++;
-                        count++;
-                    }
+                    count = string_printf(count, buffer, &buffer_index, va_arg(args, const char *));
                     break;
                 }
                 case '%':
