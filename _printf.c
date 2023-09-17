@@ -9,45 +9,44 @@
 *Return:  the length of the string.
 **/
 
-
 int _printf(const char *format, ...) {
     va_list args;
+    char buffer[1024];
     int count = 0;
+    int buffer_index = 0;
 
     va_start(args, format);
 
     while (*format) {
         if (*format == '%') {
-            format++; 
-
-            
+            format++;
             switch (*format) {
                 case 'c': {
-                    char c = va_arg(args, int); 
-                    write(1, &c, 1); 
+                    char c = va_arg(args, int);
+                    buffer[buffer_index++] = c;
                     count++;
                     break;
                 }
                 case 's': {
                     const char *str = va_arg(args, const char *);
                     while (*str) {
-                        write(1, str, 1); 
+                        buffer[buffer_index++] = *str;
                         str++;
                         count++;
                     }
                     break;
                 }
                 case '%':
-                    write(1, "%", 1); 
+                    buffer[buffer_index++] = '%';
                     count++;
                     break;
                 default:
-                    write(1, "%", 1);
+                    buffer[buffer_index++] = '%';
                     count++;
                     break;
             }
         } else {
-            write(1, format, 1); 
+            buffer[buffer_index++] = *format;
             count++;
         }
         format++;
@@ -55,5 +54,10 @@ int _printf(const char *format, ...) {
 
     va_end(args);
 
+    if (buffer_index > 0) {
+        write(1, buffer, buffer_index);
+    }
+
     return count;
 }
+
