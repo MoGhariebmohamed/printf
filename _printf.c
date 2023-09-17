@@ -7,7 +7,8 @@
 *@format: identifier to look for.
 *
 *Return:  the length of the string.
-*/
+**/
+
 
 int _printf(const char *format, ...) {
     va_list args;
@@ -22,13 +23,13 @@ int _printf(const char *format, ...) {
             // Handle conversion specifiers
             switch (*format) {
                 case 'c': {
-                    char c = va_arg(args, void); // Use void for argument type
+                    char c = va_arg(args, int); // char is promoted to int
                     write(1, &c, 1); // Write the character to stdout
                     count++;
                     break;
                 }
                 case 's': {
-                    const char *str = va_arg(args, void); // Use void for argument type
+                    const char *str = va_arg(args, const char *);
                     while (*str) {
                         write(1, str, 1); // Write each character to stdout
                         str++;
@@ -56,7 +57,3 @@ int _printf(const char *format, ...) {
 
     return count;
 }
-
-    return count;
-}
-
