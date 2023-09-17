@@ -47,6 +47,11 @@ int _printf(const char *format, ...) {
         } else {
             buffer[buffer_index++] = *format;
             count++;
+
+            if (buffer_index > 0) {
+                write(1, buffer, buffer_index);
+                buffer_index = 0;
+            }
         }
         format++;
     }
