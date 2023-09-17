@@ -18,36 +18,36 @@ int _printf(const char *format, ...) {
 
     while (*format) {
         if (*format == '%') {
-            format++; // Move past '%'
+            format++; 
 
-            // Handle conversion specifiers
+            
             switch (*format) {
                 case 'c': {
-                    char c = va_arg(args, int); // char is promoted to int
-                    write(1, &c, 1); // Write the character to stdout
+                    char c = va_arg(args, int); 
+                    write(1, &c, 1); 
                     count++;
                     break;
                 }
                 case 's': {
                     const char *str = va_arg(args, const char *);
                     while (*str) {
-                        write(1, str, 1); // Write each character to stdout
+                        write(1, str, 1); 
                         str++;
                         count++;
                     }
                     break;
                 }
                 case '%':
-                    write(1, "%", 1); // Write '%' to stdout
+                    write(1, "%", 1); 
                     count++;
                     break;
                 default:
-                    write(1, "%", 1); // Write '%' to stdout if not recognized
+                    write(1, "%", 1);
                     count++;
                     break;
             }
         } else {
-            write(1, format, 1); // Write non-format characters to stdout
+            write(1, format, 1); 
             count++;
         }
         format++;
