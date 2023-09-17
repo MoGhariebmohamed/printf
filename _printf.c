@@ -6,11 +6,12 @@
  * Return: the length of the string.
  */
 
+#include <stdarg.h>
+#include <unistd.h>
+
 int _printf(const char *format, ...) {
     va_list args;
-    char buffer[1024]; // Buffer to accumulate characters
     int count = 0;
-    int buffer_index = 0; // Index to track the buffer position
 
     va_start(args, format);
 
@@ -21,31 +22,31 @@ int _printf(const char *format, ...) {
             // Handle conversion specifiers
             switch (*format) {
                 case 'c': {
-                    char c = va_arg(args, int); // char is promoted to int
-                    buffer[buffer_index++] = c; // Add character to the buffer
+                    char c = va_arg(args, void); // Use void for argument type
+                    write(1, &c, 1); // Write the character to stdout
                     count++;
                     break;
                 }
                 case 's': {
-                    const char *str = va_arg(args, const char *);
+                    const char *str = va_arg(args, void); // Use void for argument type
                     while (*str) {
-                        buffer[buffer_index++] = *str; // Add characters to the buffer
+                        write(1, str, 1); // Write each character to stdout
                         str++;
                         count++;
                     }
                     break;
                 }
                 case '%':
-                    buffer[buffer_index++] = '%'; // Add '%' to the buffer
+                    write(1, "%", 1); // Write '%' to stdout
                     count++;
                     break;
                 default:
-                    buffer[buffer_index++] = '%'; // Add '%' to the buffer if not recognized
+                    write(1, "%", 1); // Write '%' to stdout if not recognized
                     count++;
                     break;
             }
         } else {
-            buffer[buffer_index++] = *format; // Add non-format characters to the buffer
+            write(1, format, 1); // Write non-format characters to stdout
             count++;
         }
         format++;
@@ -53,10 +54,8 @@ int _printf(const char *format, ...) {
 
     va_end(args);
 
-    // Write the accumulated buffer to stdout
-    if (buffer_index > 0) {
-        write(1, buffer, buffer_index);
-    }
+    return count;
+}
 
     return count;
 }
