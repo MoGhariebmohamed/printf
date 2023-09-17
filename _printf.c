@@ -14,7 +14,10 @@ int _printf(const char *format, ...) {
     char buffer[1024];
     int count = 0;
     int buffer_index = 0;
-
+    
+    if (format == NULL || (format[0] == '%' && format[1] == '\0'))
+		return (-1);
+    
     va_start(args, format);
 
     while (*format) {
