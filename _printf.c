@@ -1,13 +1,13 @@
 #include <stdarg.h>
 #include <unistd.h>
-/**
- * _printf - is a function that selects the correct function to print.
- * @format: identifier to look for.
- * Return: the length of the string.
- */
 
-#include <stdarg.h>
-#include <unistd.h>
+
+/**
+* _printf - is a function that do the same functions as print.
+*@format: identifier to look for.
+*
+*Return:  the length of the string.
+*/
 
 int _printf(const char *format, ...) {
     va_list args;
