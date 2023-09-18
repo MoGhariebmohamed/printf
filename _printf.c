@@ -2,12 +2,9 @@
 
 /**
  * _printf - Custom printf function.
- *
- * This function formats and prints a string to the standard output.
- *
+ *description: This function formats and prints a string to the standard output.
  * @param format: The format string with optional format specifiers.
  * @param ...: Variable number of arguments to replace format specifiers.
- *
  * @return: The number of characters printed (excluding the null terminator),
  *          or -1 on error.
  */
