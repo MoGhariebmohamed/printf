@@ -1,5 +1,4 @@
 #include "main.h"
-
 /**
  *_printf - Custom printf function.
  *description: This function formats and prints a string to standard output.
@@ -15,7 +14,6 @@ int _printf(const char *format, ...)
 
 	if (format == NULL || (format[0] == '%' && format[1] == '\0'))
 		return (-1);
-
 	va_start(args, format);
 	while (*format)
 	{
