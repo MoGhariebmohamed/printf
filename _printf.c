@@ -5,10 +5,7 @@
  *@format: The format string with optional format specifiers.
  *Return: number characters printed(excluding the null terminator),or -1 error
  
-
-
  <<<<<<< HEAD
- */
 int _printf(const char *format, ...) {
     va_list args;
     char buffer[1024];
@@ -68,8 +65,9 @@ int _printf(const char *format, ...) {
 
     return count;
 
-/**
+
 =======
+*/
 int _printf(const char *format, ...)
 {
 	va_list args;
@@ -123,5 +121,5 @@ int _printf(const char *format, ...)
 	if (buffer_index > 0)
 		write(1, buffer, buffer_index);
 	return (count);
->>>>>>> mogharieb*/
+/**>>>>>>> mogharieb*/
 }
