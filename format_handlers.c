@@ -12,5 +12,6 @@ formatH format_handlers[] = {
     {'o', oct_printf},
     {'x', hex_printf},
     {'X', hex_upper_printf},
+    {'b', bin_printf}, 
     {'\0', NULL}
 };

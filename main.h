@@ -23,6 +23,7 @@ int uint_printf(int count, char buffer[], int *buffer_index, va_list args);
 int oct_printf(int count, char buffer[], int *buffer_index, va_list args);
 int hex_upper_printf(int count, char buffer[], int *buffer_index, va_list args);
 int hex_printf(int count, char buffer[], int *buffer_index, va_list args);
+int bin_printf(int count, char buffer[], int *buffer_index, va_list args);
 
 /* Function prototype for the _printf function */
 int _printf(const char *format, ...);
