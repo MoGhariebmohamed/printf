@@ -1,5 +1,8 @@
 #include "main.h"
 
+/**      if (format[0] == '%' && format[1] == ' ' && format[2] == '\0')
+                 return (-1);*/
+
 /**
  * int_printf - Append an integer to a character buffer.
  *
