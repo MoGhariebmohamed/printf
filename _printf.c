@@ -5,7 +5,7 @@
  *@format: The format string with optional format specifiers.
  *Return: number characters printed(excluding the null terminator),or -1 error
  */
-/*
+/**
 <<<<<<< HEAD
 int _printf(const char *format, ...) {
     va_list args;
