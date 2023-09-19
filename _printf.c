@@ -21,25 +21,24 @@ int _printf(const char *format, ...)
 			format++;
 			switch (*format)
 			{
-				case 'c':
-						count = char_printf(count, buffer, &buffer_index, va_arg(args, int));
-						break;
-				case 's':
-						count = string_printf(count, buffer, &buffer_index,
-								va_arg(args, const char *));
-						break;
-				case 'd':
-				case 'i':
-					count = int_printf(count, buffer, &buffer_index, va_arg(args, int));
-						break;
-				case '%':
-					buffer[buffer_index++] = '%';
-					count++;
-					break;
-				default:
-					buffer[buffer_index++] = '%';
-					count++;
-					break;
+			case 'c':
+				count = char_printf(count, buffer, &buffer_index, va_arg(args, int));
+				break;
+			case 's':
+				count = string_printf(count, buffer, &buffer_index,va_arg(args, const char *));
+				break;
+			case 'd':
+			case 'i':
+				count = int_printf(count, buffer, &buffer_index, va_arg(args, int));
+				break;
+			case '%':
+				buffer[buffer_index++] = '%';
+				count++;
+				break;
+			default:
+				buffer[buffer_index++] = '%';
+				count++;
+				break;
 			}
 		}
 		else
