@@ -9,16 +9,8 @@ int _printf(const char *format, ...)
 {
 	va_list args;
 	char buffer[1024];
-	int count = 0;
-	int buffer_index = 0, i = 0;
+	int count = 0, buffer_index = 0;
 
-	formatH format_handlers[] = {
-		{'c', char_printf}, {'s', string_printf},
-		{'d', int_printf}, {'i', int_printf},
-		{'u', uint_printf}, {'o', oct_printf},
-		{'x', hex_printf}, {'X', hex_upper_printf},
-		{'b', bin_printf}, {'\0', NULL}
-	};
 	if (format == NULL || (format[0] == '%' && format[1] == '\0'))
 		return (-1);
 	va_start(args, format);
@@ -27,31 +19,38 @@ int _printf(const char *format, ...)
 		if (*format == '%')
 		{
 			format++;
-			i = 0;
-			while (format_handlers[i].specifier != '\0')
+			switch (*format)
 			{
-				if (format_handlers[i].specifier == *format)
-				{
-					count = format_handlers[i].handler(count, buffer, &buffer_index, args);
+				case 'c':
+						count = char_printf(count, buffer, &buffer_index, va_arg(args, int));
+						break;
+				case 's':
+						count = string_printf(count, buffer, &buffer_index,
+								va_arg(args, const char *));
+						break;
+				case 'd':
+				case 'i':
+					count = int_printf(count, buffer, &buffer_index, va_arg(args, int));
+						break;
+				case '%':
+					buffer[buffer_index++] = '%';
+					count++;
 					break;
-				}
-				i++;
-			}
-			if (format_handlers[i].specifier == '\0')
-			{
-				buffer[buffer_index++] = *format;
-				count++;
+				default:
+					buffer[buffer_index++] = '%';
+					count++;
+					break;
 			}
 		}
 		else
 		{
 			buffer[buffer_index++] = *format;
 			count++;
-		}
-		if (buffer_index > 0)
-		{
-			write(1, buffer, buffer_index);
-			buffer_index = 0;
+			if (buffer_index > 0)
+			{
+				write(1, buffer, buffer_index);
+				buffer_index = 0;
+			}
 		}
 		format++;
 	}
